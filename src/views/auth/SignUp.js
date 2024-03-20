@@ -14,9 +14,10 @@ import AuthContext from '../../AuthContext';
 
 function SignUp() {
 	const [name, setName] = useState("");
-    const [registerEmail, setRegisterEmail] = useState("");
-    const [registerPassword, setRegisterPassword] = useState("");
-    const [registerConfirmedPassword, setRegisterConfirmedPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    
+    const [errors, setErrors] = useState({name: "", email: "", password: ""})
 
     const {user, setUser} = useContext(AuthContext);
 
@@ -27,15 +28,15 @@ function SignUp() {
         try {
             const {data} = await axios.post("http://localhost:4000/signup", {
                 name: name,
-                email: registerEmail,
-                password: registerPassword
+                email: email,
+                password: password
             }, {withCredentials: true})
             if(data) {
                 if (data.errors) {
-                    const {name, email, password} = data.errors;
-                    if (email) generateError(email)
-                    else if (password) generateError(password)
-                    else if (name) generateError(name)
+                    const {nameError, emailError, passwordError} = data.errors;
+                    if (nameError) generateError(nameError)
+                    else if (passwordError) generateError(passwordError)
+                    else if (emailError) generateError(emailError)
                 }
                 else {
                     setUser(data.user)
@@ -45,6 +46,36 @@ function SignUp() {
         }
         catch (error) {
             console.log(error.message)
+        }
+    }
+
+    const validateForm = () => Object.keys(errors).length === 0
+
+    const handleErrors = (key, value) => {
+        let isValid = true;
+        if (key === "email") {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if(!emailRegex.test(value)) {
+                setErrors({...errors, [key]: `Invalid email address`})
+                isValid = false
+            }
+        }
+        else if (key === "password") {
+            if (password.length < 8) {
+                setErrors({...errors, [key]: `Password must be at least 8 characters long`})
+                isValid = false
+            }
+        }
+        else {
+            if (value === "") {
+                setErrors({ ...errors, [key]: `${key} cannot be empty` })
+                isValid = false
+            }
+        }
+        if (isValid) {
+            const newErrors = { ...errors };
+            delete newErrors[key];
+            setErrors(newErrors);
         }
     }
 
@@ -65,29 +96,35 @@ function SignUp() {
                                     <Form.Control
                                         value={name}
                                         type="text"
+                                        onKeyUp={(e) => handleErrors("name", e.target.value)}
                                         onChange={(e) => setName(e.target.value)}
                                         required
                                     />
+                                    <p className="text-danger mt-1">{errors.name}</p>
                                 </Form.Group>
                                 <Form.Group id="email" className="my-2">
                                     <Form.Label>Email</Form.Label>
                                     <Form.Control
-                                        value={registerEmail}
+                                        value={email}
                                         type="email"
-                                        onChange={(e) => setRegisterEmail(e.target.value)}
+                                        onKeyUp={(e) => handleErrors("email", e.target.value)}
+                                        onChange={(e) => setEmail(e.target.value)}
                                         required
                                     />
+                                    <p className="text-danger mt-1">{errors.email}</p>
                                 </Form.Group>
                                 <Form.Group id="password" className="my-2">
                                     <Form.Label>Password</Form.Label>
                                     <Form.Control
-                                        value={registerPassword}
+                                        value={password}
                                         type="password"
-                                        onChange={(e) => setRegisterPassword(e.target.value)}
+                                        onKeyUp={(e) => handleErrors("password", e.target.value)}
+                                        onChange={(e) => setPassword(e.target.value)}
                                         required
                                     />
+                                    <p className="text-danger mt-1">{errors.password}</p>
                                 </Form.Group>
-                                <Button variant="primary" type="submit" className="my-2">
+                                <Button variant="success" type="submit" className="my-2" disabled={!validateForm()}>
                                     Sign Up
                                 </Button>
                                 <Card.Text className="my-2">Already have an account? <Link to="/login">Login</Link></Card.Text>
