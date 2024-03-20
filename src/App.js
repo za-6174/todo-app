@@ -1,25 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { useCookies } from 'react-cookie';
+import AuthContext from './AuthContext'
+
+import Home from './views/home/Home';
+import Login from './views/auth/Login';
+import SignUp from './views/auth/SignUp';
+
+import axios from 'axios';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+
+import NavBar from './components/NavBar';
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+	const [cookies, removeCookie] = useCookies([]);
+
+	const [user, setUser] = useState(null)
+
+
+	useEffect(() => {
+        const verifyUser = async () => {
+          //   if (cookies.jwt) {
+          //       const {data} = await axios.post("http://localhost:4000", {}, {withCredentials: true});
+          //       if (!data.status) {
+					// setUser(null)
+          //           removeCookie("jwt")
+          //       }
+          //       else {
+					// setUser(data.user)
+          //       }
+          //   }
+        }
+        verifyUser();
+    }, [cookies, removeCookie])
+	
+	return (
+		<AuthContext.Provider value={{user, setUser}}>
+			{
+				<Router>
+          <NavBar />
+					<Routes>
+						<Route exact path='/' element={<Home />} />
+						<Route exact path='/login' element={<Login />} />
+						<Route exact path='/signup' element={<SignUp />} />
+					</Routes>
+					<ToastContainer />
+				</Router>
+			}
+		</AuthContext.Provider>
+	);
 }
+
 
 export default App;
