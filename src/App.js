@@ -6,6 +6,7 @@ import AuthContext from './AuthContext'
 import Home from './views/home/Home';
 import Login from './views/auth/Login';
 import SignUp from './views/auth/SignUp';
+import Logout from './views/auth/Logout';
 
 import axios from 'axios';
 
@@ -26,16 +27,16 @@ function App() {
 
 	useEffect(() => {
         const verifyUser = async () => {
-          //   if (cookies.jwt) {
-          //       const {data} = await axios.post("http://localhost:4000", {}, {withCredentials: true});
-          //       if (!data.status) {
-					// setUser(null)
-          //           removeCookie("jwt")
-          //       }
-          //       else {
-					// setUser(data.user)
-          //       }
-          //   }
+            if (cookies.jwt) {
+                const {data} = await axios.post("http://localhost:4000", {}, {withCredentials: true});
+                if (!data.status) {
+					setUser(null)
+                    removeCookie("jwt")
+                }
+                else {
+					setUser(data.user)
+                }
+            }
         }
         verifyUser();
     }, [cookies, removeCookie])
@@ -49,6 +50,7 @@ function App() {
 						<Route exact path='/' element={<Home />} />
 						<Route exact path='/login' element={<Login />} />
 						<Route exact path='/signup' element={<SignUp />} />
+						<Route exact path='/logout' element={<Logout />} />
 					</Routes>
 					<ToastContainer />
 				</Router>

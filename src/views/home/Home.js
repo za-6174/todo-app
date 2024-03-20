@@ -1,13 +1,17 @@
-import { React } from 'react';
+import { React, useContext } from 'react';
 
 // ===== React packages import =====
 import { Link } from 'react-router-dom';
+import AuthContext from '../../AuthContext';
 
 // ===== Bootstrap imports ====== 
 import { Button, Row, Col, Container, Card } from 'react-bootstrap';
 
 
+
 const Home = () => {
+    const {user} = useContext(AuthContext)
+
     return (
         <Container fluid>
             <Row className='justify-content-center'>
@@ -15,7 +19,9 @@ const Home = () => {
                     <Card className='m-5'>
                         <Card.Img variant="top" src="" />
                         <Card.Body>
-                            <Card.Title>Hey there👋</Card.Title>
+                            <Card.Title>
+                                {user ? `Hi ${user.name}👋`  : "Hey there👋"}
+                            </Card.Title>
                             <h1>Welcome to our Todo Application for managing daily tasks</h1>
                             <Card.Text>
                                 Get Started Now!

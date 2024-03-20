@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react"
 
 // ===== React packages import =====
 import { useNavigate, Link } from 'react-router-dom'
-import {ToastContainer, toast} from 'react-toastify';
 import axios from "axios";
 
 // ===== Bootstrap imports ====== 
@@ -10,6 +9,7 @@ import { Form, Button, Card, Container, Row, Col} from 'react-bootstrap'
 
 // ===== Auth imports ====== 
 import AuthContext from '../../AuthContext';
+import { showErrorToast } from "../../utils/toastUtils";
 
 
 function SignUp() {
@@ -23,6 +23,11 @@ function SignUp() {
 
     const navigate = useNavigate()
 
+    useEffect(() => {
+        if (user)
+            navigate("/")
+    }, [user, navigate])
+
     const register = async (event) => {
         event.preventDefault();
         try {
@@ -32,11 +37,12 @@ function SignUp() {
                 password: password
             }, {withCredentials: true})
             if(data) {
+                console.log(data)
                 if (data.errors) {
-                    const {nameError, emailError, passwordError} = data.errors;
-                    if (nameError) generateError(nameError)
-                    else if (passwordError) generateError(passwordError)
-                    else if (emailError) generateError(emailError)
+                    const {name, email, password} = data.errors;
+                    if (name) showErrorToast(name)
+                    else if (password) showErrorToast(password)
+                    else if (email) showErrorToast(email)
                 }
                 else {
                     setUser(data.user)
@@ -78,10 +84,6 @@ function SignUp() {
             setErrors(newErrors);
         }
     }
-
-    const generateError = (err) => toast.error(err, {
-        position: "bottom-right"
-    })
 
 	return (
         <Container fluid>
@@ -133,7 +135,6 @@ function SignUp() {
                     </Card>
                 </Col>
             </Row>
-            <ToastContainer />
         </Container>
 	);
 }

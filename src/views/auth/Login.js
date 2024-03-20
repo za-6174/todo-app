@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react"
 
 // ===== React packages import =====
 import { useNavigate, Link } from 'react-router-dom'
-import {ToastContainer, toast} from 'react-toastify';
 import axios from "axios";
 
 // ===== Bootstrap imports ====== 
@@ -10,6 +9,9 @@ import { Form, Button, Card, Container, Row, Col} from 'react-bootstrap'
 
 // ===== Auth imports ====== 
 import AuthContext from '../../AuthContext';
+
+// ===== Custom Components ======
+import {showErrorToast} from '../../utils/toastUtils'
 
 
 function Login() {
@@ -20,14 +22,34 @@ function Login() {
 
     const navigate = useNavigate()
 
+    useEffect(() => {
+        if (user)
+            navigate("/")
+    }, [user, navigate])
 
     const login = async (event) => {
-        
+        event.preventDefault();
+        try {
+            const {data} = await axios.post("http://localhost:4000/login", {
+                email: loginEmail,
+                password: loginPassword
+            }, {withCredentials: true})
+            if(data) {
+                if (data.errors) {
+                    const {email, password} = data.errors;
+                    if (email) showErrorToast(email)
+                    else if (password) showErrorToast(password)
+                }
+                else {
+                    setUser(data.user)
+                    navigate("/");
+                }
+            }
+        }
+        catch (error) {
+            console.log(error.message)
+        }
     }
-
-    const generateError = (err) => toast.error(err, {
-        position: "bottom-right"
-    })
 
 	return (
         <Container fluid>
@@ -64,7 +86,6 @@ function Login() {
                     </Card>
                 </Col>
             </Row>
-            <ToastContainer />
         </Container>
 	);
 }
