@@ -44,7 +44,7 @@ function App() {
 		<AuthContext.Provider value={{user, setUser}}>
 			{
 				<Router>
-          <NavBar />
+          			<NavBar />
 					<Routes>
 						<Route exact path='/' element={<Home />} />
 						<Route exact path='/login' element={<Login />} />

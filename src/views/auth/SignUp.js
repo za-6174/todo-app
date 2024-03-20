@@ -23,6 +23,29 @@ function SignUp() {
     const navigate = useNavigate()
 
     const register = async (event) => {
+        event.preventDefault();
+        try {
+            const {data} = await axios.post("http://localhost:4000/signup", {
+                name: name,
+                email: registerEmail,
+                password: registerPassword
+            }, {withCredentials: true})
+            if(data) {
+                if (data.errors) {
+                    const {name, email, password} = data.errors;
+                    if (email) generateError(email)
+                    else if (password) generateError(password)
+                    else if (name) generateError(name)
+                }
+                else {
+                    setUser(data.user)
+                    navigate("/")
+                }
+            }
+        }
+        catch (error) {
+            console.log(error.message)
+        }
     }
 
     const generateError = (err) => toast.error(err, {

@@ -22,6 +22,7 @@ function Login() {
 
 
     const login = async (event) => {
+        
     }
 
     const generateError = (err) => toast.error(err, {
