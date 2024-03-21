@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { Outlet, Navigate } from 'react-router-dom'
+
 import { useCookies } from 'react-cookie';
 import AuthContext from './AuthContext'
 
@@ -52,7 +54,9 @@ function App() {
 						<Route exact path='/login' element={<Login />} />
 						<Route exact path='/signup' element={<SignUp />} />
 						<Route exact path='/logout' element={<Logout />} />
-						<Route exact path='/app' element={<TodoList />} />
+						<Route element={<PrivateRoutes />}>
+							<Route exact path='/app' element={<TodoList />} />
+						</Route>
 					</Routes>
 					<ToastContainer />
 				</Router>
@@ -61,5 +65,11 @@ function App() {
 	);
 }
 
+const PrivateRoutes = () => {
+    const {user} = useContext(AuthContext)
+    return(
+        user ? <Outlet/> : <Navigate to="/login"/>
+    )
+}
 
 export default App;

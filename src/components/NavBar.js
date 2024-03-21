@@ -20,7 +20,7 @@ function NavBar(){
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="/app">Add Tasks</Nav.Link>
+                        <Link to="/app" className='nav-link'>Add Tasks</Link>
                     </Nav>
                     <Nav>
                         {
