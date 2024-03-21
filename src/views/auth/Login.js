@@ -78,7 +78,7 @@ function Login() {
                                         required
                                     />
                                 </Form.Group>
-                                <Button variant="primary" type="submit" className="my-2">
+                                <Button variant="success" type="submit" className="my-2">
                                     Login
                                 </Button>
                                 <Card.Text className="my-2">Don't have an account? <Link to="/signup">Sign Up</Link></Card.Text>

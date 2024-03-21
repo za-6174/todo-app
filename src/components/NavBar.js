@@ -27,9 +27,9 @@ function NavBar(){
                     <Nav>
                         {
                             !user ?
-                                <Nav.Link href="/login">Login</Nav.Link>
+                                <Link to="/login" className='nav-link'>Login</Link>
                             :
-                                <Nav.Link href="/logout">Logout</Nav.Link>
+                                <Link to="/logout" className='nav-link'>Logout</Link>
                         }
                     </Nav>
                 </Navbar.Collapse>

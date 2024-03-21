@@ -92,7 +92,7 @@ export default function TodoList() {
                                             <p className="m-0">{moment(t.dueDate).format('MMM DD YYYY h:mm A')}</p>
                                         </div>
                                         <div>
-                                            {t.isReminderSent ? <Badge bg="info">Overdue email reminder sent</Badge> : ""}
+                                            {t.isReminderSent ? <Badge pill bg="info">Overdue email reminder already sent</Badge> : ""}
                                         </div>
                                     </div>
                                     <div className="p-1 d-flex align-items-center" style={{columnGap: 20}}>
