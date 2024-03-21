@@ -1,7 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useContext, useEffect } from 'react';
-import AuthContext from '../../AuthContext';
 import {API_URL} from '../../utils/API';
 
 export default function Logout() {
