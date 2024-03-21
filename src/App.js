@@ -16,6 +16,7 @@ import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
 import NavBar from './components/NavBar';
+import TodoList from './views/todo/TodoList';
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
 						<Route exact path='/login' element={<Login />} />
 						<Route exact path='/signup' element={<SignUp />} />
 						<Route exact path='/logout' element={<Logout />} />
+						<Route exact path='/app' element={<TodoList />} />
 					</Routes>
 					<ToastContainer />
 				</Router>

@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #F9F9F9!important;
 }
 
 code {
@@ -13,4 +14,18 @@ code {
 }
 .link {
   text-decoration: none;
+}
+.react-datepicker-wrapper {
+  width: 100%;
+}
+.todo_item {
+  display: flex;
+  align-items: center;
+  box-shadow: rgba(0,0,0,0.10);
+  background-color: #fff;
+  border-radius: 10px;
+  justify-content: space-between;
+}
+.navbar-light {
+  background-color: #fff!important;
 }
