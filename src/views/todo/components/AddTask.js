@@ -17,11 +17,13 @@ export default function AddTask({task, updateTask}) {
             setTaskId(task._id)
             setTaskName(task.taskName)
             setDueDate(task.dueDate)
+            setErrors({})
         }
         else {
             setTaskId("")
             setTaskName("")
             setDueDate("")
+            setErrors({taskName: "", dueDate: ""})
         }
     }, [task])
 
@@ -65,6 +67,7 @@ export default function AddTask({task, updateTask}) {
                     <Form.Group id="taskName" className="my-2">
                         <Form.Label>Due Date</Form.Label><br />
                         <DatePicker 
+                            placeholderText="Task Due Date"
                             selected={dueDate} 
                             onChange={(date) => { setDueDate(date); handleErrors("dueDate") }} className='form-control w-100' 
                         />
