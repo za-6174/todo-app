@@ -6,7 +6,7 @@ This is the front-end for the todo app which allows users to log in/sign up, cre
 
 **Technologies:**
 
-* React.js
+* React.js (created app with create-react-app)
 * JavaScript
 
 **Installation and Setup:**
@@ -17,6 +17,7 @@ This is the front-end for the todo app which allows users to log in/sign up, cre
 2. **Clone the Repository:**
    ```bash
    git clone https://github.com/za-6174/todo-app.git
+   cd todo-app
 3. Install packages
    ```bash
    npm install  # or yarn install
