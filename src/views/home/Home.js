@@ -8,16 +8,15 @@ import AuthContext from '../../AuthContext';
 import { Button, Row, Col, Container, Card } from 'react-bootstrap';
 
 
-
 const Home = () => {
     const {user} = useContext(AuthContext)
 
     return (
         <Container fluid>
             <Row className='justify-content-center'>
-                <Col xl={10}>
+                <Col xl={8}>
                     <Card className='m-5'>
-                        <Card.Img variant="top" src="" />
+                        <Card.Img variant="top" src="/assets/img/calendar-hero.png" width="auto" height={200} alt="Todo Application" style={{objectFit: "cover"}}/>    
                         <Card.Body>
                             <Card.Title>
                                 {user ? `Hi ${user.name}👋`  : "Hey there👋"}
