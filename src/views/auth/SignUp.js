@@ -38,7 +38,6 @@ function SignUp() {
                 password: password
             }, {withCredentials: true})
             if(data) {
-                console.log(data)
                 if (data.errors) {
                     const {name, email, password} = data.errors;
                     if (name) showErrorToast(name)
