@@ -104,7 +104,13 @@ export default function TodoList() {
                         {
                             tasks.map(t => 
                                 t &&
-                                <TaskItem key={t._id} task={t} setTask={setTask} markTask={markTask} deleteTask={deleteTask} />
+                                <TaskItem 
+                                    key={t._id} 
+                                    task={t} 
+                                    setTask={setTask} 
+                                    markTask={markTask} 
+                                    deleteTask={deleteTask} 
+                                />
                             )
                         }
                     </div>
