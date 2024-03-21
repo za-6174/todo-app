@@ -4,6 +4,8 @@ import { Col, Form, Row, Button } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+import moment from "moment";
+
 export default function AddTask({task, updateTask}) {
 
     const [taskId, setTaskId] = useState("")
@@ -16,7 +18,7 @@ export default function AddTask({task, updateTask}) {
         if (task) {
             setTaskId(task._id)
             setTaskName(task.taskName)
-            setDueDate(task.dueDate)
+            setDueDate(new Date(moment(task.dueDate)))
             setErrors({})
         }
         else {
@@ -70,6 +72,8 @@ export default function AddTask({task, updateTask}) {
                             placeholderText="Task Due Date"
                             selected={dueDate} 
                             onChange={(date) => { setDueDate(date); handleErrors("dueDate") }} className='form-control w-100' 
+                            dateFormat="MMM dd yyyy h:mm aa"
+                            showTimeSelect
                         />
                     </Form.Group>
                 </Col>

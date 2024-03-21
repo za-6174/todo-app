@@ -12,6 +12,8 @@ import axios from "axios";
 
 import {FaPen, FaTrash, FaCalendar} from 'react-icons/fa'
 
+import moment from "moment";
+
 export default function TodoList() {
 
     const {user} = useContext(AuthContext)
@@ -87,7 +89,7 @@ export default function TodoList() {
                                         <h4>{t.taskName}</h4>
                                         <div className="d-flex align-items-center my-2" style={{columnGap: 10}}>
                                             <FaCalendar style={{color: "#EBECF0"}} /> 
-                                            <p className="m-0">{new Date(t.dueDate).toDateString()}</p>
+                                            <p className="m-0">{moment(t.dueDate).format('MMM DD YYYY h:mm A')}</p>
                                         </div>
                                     </div>
                                     <div className="p-1 d-flex align-items-center" style={{columnGap: 20}}>
