@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 
-import {Row, Container, Col, Badge} from 'react-bootstrap'
+import {Row, Container, Col, Badge, Form} from 'react-bootstrap'
 
 import AddTask from "./components/AddTask";
 import AuthContext from "../../AuthContext";
@@ -75,6 +75,27 @@ export default function TodoList() {
 		}
     }
 
+    const markTask = async (taskId) => {
+        try {
+            const {data} = await axios.post(`${API_URL}/marktask`, {
+				taskId: taskId
+            }, {withCredentials: true})
+            if(data) {
+				if (data.success) {
+                    let markedTask = data.data
+					showSuccessToast("Marked successfully");
+					setTasks((prev) => prev.map(t => t._id === taskId ? markedTask : t))
+				}
+				else {
+					showErrorToast(data.message)
+				}
+			}
+		}
+		catch(err) {
+			showErrorToast(err)
+		}
+    }
+
     return (
         <Container fluid>
             <Row className="justify-content-center">
@@ -85,14 +106,24 @@ export default function TodoList() {
                         {
                             tasks.map(t => 
                                 <div className="todo_item px-4 py-2 my-3" key={t._id}>
-                                    <div>
-                                        <h4>{t.taskName}</h4>
-                                        <div className="d-flex align-items-center my-2" style={{columnGap: 10}}>
-                                            <FaCalendar style={{color: "#EBECF0"}} /> 
-                                            <p className="m-0">{moment(t.dueDate).format('MMM DD YYYY h:mm A')}</p>
+                                    <div className="d-flex align-items-start" style={{columnGap: 20}}>
+                                        <div>
+                                            <Form.Check
+                                                type={"checkbox"}
+                                                id={`default-checkbox`}
+                                                checked={t.isDone}
+                                                onClick={() => markTask(t._id)}
+                                            />
                                         </div>
                                         <div>
-                                            {t.isReminderSent ? <Badge pill bg="info">Overdue email reminder already sent</Badge> : ""}
+                                            <h4 style={t.isDone ? {textDecoration: "line-through"} : {}}>{t.taskName}</h4>
+                                            <div className="d-flex align-items-center my-2" style={{columnGap: 10}}>
+                                                <FaCalendar style={{color: "#EBECF0"}} /> 
+                                                <p className="m-0">{moment(t.dueDate).format('MMM DD YYYY h:mm A')}</p>
+                                            </div>
+                                            <div>
+                                                {t.isReminderSent ? <Badge pill bg="info">Overdue email reminder already sent</Badge> : ""}
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="p-1 d-flex align-items-center" style={{columnGap: 20}}>
