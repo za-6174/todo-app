@@ -12,10 +12,10 @@ import AuthContext from '../AuthContext';
 function NavBar(){
     const {user} = useContext(AuthContext)
     return (
-        <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
+        <Navbar collapseOnSelect expand="lg" className="bg-white">
             <Container>
                 <Link to="/" className='link'>
-                    <Navbar.Brand>Todo App</Navbar.Brand>
+                    <Navbar.Brand style={{color: "#7D31A6", fontWeight: 600}}>Todo App</Navbar.Brand>
                 </Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
