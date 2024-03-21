@@ -15,6 +15,7 @@ This is the front-end for the todo app which allows users to log in/sign up, cre
 
 1. **Prerequisites:**
    - **Node.js and npm (or yarn):** Ensure you have Node.js (version 14 or later) and npm (or yarn) installed on your system. Download them from the official Node.js website if needed: https://nodejs.org/en
+   - Ensure **back end** part is up and running before running the front end. Here is the link: https://github.com/za-6174/todo-app-backend
 
 2. **Clone the Repository:**
    ```bash
