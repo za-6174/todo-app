@@ -3,10 +3,12 @@ import {React, useContext} from 'react';
 // ===== React packages import =====
 import { Link } from 'react-router-dom';
 
-// ===== React packages import =====
+// ===== Bootstrap import =====
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+
+// ==== Other components import =====
 import AuthContext from '../AuthContext';
 
 function NavBar(){

@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 
-import {Row, Container, Col} from 'react-bootstrap'
+import {Row, Container, Col, Badge} from 'react-bootstrap'
 
 import AddTask from "./components/AddTask";
 import AuthContext from "../../AuthContext";
@@ -90,6 +90,9 @@ export default function TodoList() {
                                         <div className="d-flex align-items-center my-2" style={{columnGap: 10}}>
                                             <FaCalendar style={{color: "#EBECF0"}} /> 
                                             <p className="m-0">{moment(t.dueDate).format('MMM DD YYYY h:mm A')}</p>
+                                        </div>
+                                        <div>
+                                            {t.isReminderSent ? <Badge bg="info">Overdue email reminder sent</Badge> : ""}
                                         </div>
                                     </div>
                                     <div className="p-1 d-flex align-items-center" style={{columnGap: 20}}>
