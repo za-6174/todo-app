@@ -1,6 +1,6 @@
 # Todo App React Frontend
 
-![alt text](https://github.com/za-6174/todo-app/blob/master/public/assets/img/calendar-hero.png)
+![alt text](https://github.com/za-6174/todo-app/blob/master/public/assets/img/Todo-APP-SS.png)
 
 **Description:**
 
