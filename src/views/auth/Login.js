@@ -13,6 +13,7 @@ import AuthContext from '../../AuthContext';
 // ===== Custom Components ======
 import {showErrorToast} from '../../utils/toastUtils'
 
+import { API_URL } from "../../utils/API";
 
 function Login() {
 	const [loginEmail, setLoginEmail] = useState("");
@@ -30,7 +31,7 @@ function Login() {
     const login = async (event) => {
         event.preventDefault();
         try {
-            const {data} = await axios.post("http://localhost:4000/login", {
+            const {data} = await axios.post(`${API_URL}/login`, {
                 email: loginEmail,
                 password: loginPassword
             }, {withCredentials: true})

@@ -10,6 +10,7 @@ import { Form, Button, Card, Container, Row, Col} from 'react-bootstrap'
 // ===== Auth imports ====== 
 import AuthContext from '../../AuthContext';
 import { showErrorToast } from "../../utils/toastUtils";
+import { API_URL } from "../../utils/API";
 
 
 function SignUp() {
@@ -31,7 +32,7 @@ function SignUp() {
     const register = async (event) => {
         event.preventDefault();
         try {
-            const {data} = await axios.post("http://localhost:4000/signup", {
+            const {data} = await axios.post(`${API_URL}/signup`, {
                 name: name,
                 email: email,
                 password: password
