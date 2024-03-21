@@ -1,5 +1,7 @@
 # Todo App React Frontend
 
+![alt text](https://github.com/za-6174/todo-app/blob/master/public/assets/img/calendar-hero.png)
+
 **Description:**
 
 This is the front-end for the todo app which allows users to log in/sign up, create tasks, update tasks, mark tasks as done and receive email reminders for over due tasks. 
