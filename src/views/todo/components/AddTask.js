@@ -74,6 +74,9 @@ export default function AddTask({task, updateTask}) {
                             onChange={(date) => { setDueDate(date); handleErrors("dueDate") }} className='form-control w-100' 
                             dateFormat="MMM dd yyyy h:mm aa"
                             showTimeSelect
+                            onKeyDown={(e) => {
+                                e.preventDefault();
+                            }}
                         />
                     </Form.Group>
                 </Col>
