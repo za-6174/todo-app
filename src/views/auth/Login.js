@@ -56,7 +56,7 @@ function Login() {
         <Container fluid>
             <Row className='justify-content-center'>
                 <Col xl={6}>
-                    <Card className='m-5 p-5'>
+                    <Card className='m-5 p-2'>
                         <Card.Body>
                             <Card.Title>Sign in to continue</Card.Title>
                             <Form onSubmit={login}>
