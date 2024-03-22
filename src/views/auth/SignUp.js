@@ -9,6 +9,8 @@ import { Form, Button, Card, Container, Row, Col} from 'react-bootstrap'
 
 // ===== Auth imports ====== 
 import AuthContext from '../../AuthContext';
+
+// ===== Utils imports ======
 import { showErrorToast } from "../../utils/toastUtils";
 import { API_URL } from "../../utils/API";
 
@@ -89,7 +91,7 @@ function SignUp() {
         <Container fluid>
             <Row className='justify-content-center'>
                 <Col xl={6}>
-                    <Card className='m-5 p-5'>
+                    <Card className='m-5 p-2'>
                         <Card.Body>
                             <Card.Title>Sign Up to continue</Card.Title>
                             <Form onSubmit={register}>
