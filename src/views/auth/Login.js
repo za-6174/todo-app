@@ -10,9 +10,8 @@ import { Form, Button, Card, Container, Row, Col} from 'react-bootstrap'
 // ===== Auth imports ====== 
 import AuthContext from '../../AuthContext';
 
-// ===== Custom Components ======
+// ===== Utils imports ======
 import {showErrorToast} from '../../utils/toastUtils'
-
 import { API_URL } from "../../utils/API";
 
 function Login() {
